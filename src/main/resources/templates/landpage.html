@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Exam</title>
-    <script src="script.js"></script>
+<!--    <script src="script.js"></script>-->
     <style>
         body {
             margin: 0;
@@ -32,7 +32,7 @@
         .hero-section {
             position: relative;
             height: 70vh;
-            background: url('photo.jpeg') no-repeat center center/cover;
+            background: url('/photo.jpeg') no-repeat center center/cover;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -97,15 +97,14 @@
 
     <header>
         <div style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">
-            <img src="logo.jpeg" alt="Brand Logo" style="width: 100%; height: 100%; object-fit: cover;">
+            <img th:src="@{/logo.jpeg}" alt="Brand Logo" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#profile">Profile</a></li> <!-- Keeping Profile -->
             <li><a href="#about">About</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <li><a href="#l"></a></li> <!-- Adding -->
-            <!-- Removed Portfolio -->
+            <li><a href="#l"></a></li>
         </ul>
     </header>
 
@@ -113,7 +112,7 @@
         <div class="hero-content">
             <h1>Online Exam</h1>
             <p>Experience a seamless online examination process with our platform. Take tests from anywhere, at any time.</p>
-            <a href="login.html">Login</a>
+            <a th:href="@{/loginAction}">Login</a>
         </div>
     </section>
 

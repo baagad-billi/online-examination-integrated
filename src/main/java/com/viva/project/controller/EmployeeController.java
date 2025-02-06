@@ -34,6 +34,14 @@ public class EmployeeController {
 		model.addAttribute("employee", employee);
 		return "new_employee";
 	}
+
+	@GetMapping("/loginAction")
+	public String entryLogin(Model model) {
+		// create model attribute to bind form data
+		Employee employee = new Employee();
+		model.addAttribute("employee", employee);
+		return "login";
+	}
 	
 	@PostMapping("/saveEmployee")
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
@@ -81,6 +89,6 @@ public class EmployeeController {
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 		
 		model.addAttribute("listEmployees", listEmployees);
-		return "index";
+		return "landpage";
 	}
 }
