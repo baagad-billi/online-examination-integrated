@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <script src="script.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        header ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        header ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .hero-section {
+            position: relative;
+            height: 70vh;
+            background: url('photo.jpeg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 50px;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-align: left;
+            padding: 40px;
+            max-width: 500px;
+        }
+        .hero-content h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .hero-content p {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        .hero-content a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #FFA500;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .about-section {
+            padding: 40px 20px; /* Reduced padding */
+            background-color: #fff;
+            text-align: center;
+        }
+        .about-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .about-section p {
+            font-size: 1.2em;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">
+            <img src="logo.jpeg" alt="Brand Logo" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#profile">Profile</a></li> <!-- Keeping Profile -->
+            <li><a href="#about">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#l"></a></li> <!-- Adding -->
+            <!-- Removed Portfolio -->
+        </ul>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Online Exam</h1>
+            <p>Experience a seamless online examination process with our platform. Take tests from anywhere, at any time.</p>
+            <a href="login.html">Login</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <h2>About</h2>
+        <p>
+            Welcome to our Online Exam platform, where we provide a comprehensive solution for educational institutions and students alike.
+            Our goal is to deliver an efficient, reliable, and easy-to-use examination system that empowers users to take exams from anywhere, 
+            at any time, without the hassle of traditional testing methods.
+        </p>
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Online Exam</title>
+    <style>
+        /* Inline CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        header img {
+            height: 50px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .card {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 10px 0;
+        }
+        .card h2 {
+            margin: 0;
+            color: #333;
+        }
+        .card p {
+            color: #666;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo.jpeg" alt="Logo">
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="admin-panel.html" id="admin-link">Admin Panel</a>
+        <a href="student-dashboard.html" id="student-link">Student Dashboard</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Dashboard</h1>
+
+    <div class="card">
+        <h2>Overview of Exams</h2>
+        <p>You have 3 upcoming exams scheduled for this month.</p>
+        <ul>
+            <li><strong>Mathematics:</strong> 20th October</li>
+            <li><strong>Physics:</strong> 22nd October</li>
+            <li><strong>Chemistry:</strong> 25th October</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Recent Activities</h2>
+        <p>Here are your recent activities:</p>
+        <ul>
+            <li>Completed the <strong>Mathematics</strong> exam on 15th October.</li>
+            <li>Submitted <strong>Physics</strong> assignment on 10th October.</li>
+            <li>Checked <strong>Chemistry</strong> practice tests on 12th October.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Announcements</h2>
+        <p>Latest announcements from your institution:</p>
+        <ul>
+            <li>Next week is the last week for exam preparation. <strong>All students must attend.</strong></li>
+            <li>New study materials have been uploaded for <strong>Physics</strong>.</li>
+            <li>Students are advised to review the <strong>exam guidelines</strong> before the tests.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Upcoming Exams</h2>
+        <table>
+            <tr>
+                <th>Exam Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+            </tr>
+            <tr>
+                <td>Mathematics</td>
+                <td>2024-10-20</td>
+                <td>10:00 AM</td>
+                <td>2 hours</td>
+            </tr>
+            <tr>
+                <td>Physics</td>
+                <td>2024-10-22</td>
+                <td>01:00 PM</td>
+                <td>2 hours</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Exam Results</h2>
+        <p>Results will be available on the following dates:</p>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Result Date</th>
+            </tr>
+            <tr>
+                <td>Mathematics</td>
+                <td>2024-10-25</td>
+            </tr>
+            <tr>
+                <td>Physics</td>
+                <td>2024-10-27</td>
+            </tr>
+            <tr>
+                <td>Chemistry</td>
+                <td>2024-10-30</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Example of user role
+    const userRole = 'admin'; // Change this to 'student' for testing
+
+    if (userRole === 'admin') {
+        document.getElementById('admin-link').style.display = 'block'; // Show admin link
+        document.getElementById('student-link').style.display = 'none'; // Hide student link
+    } else if (userRole === 'student') {
+        document.getElementById('admin-link').style.display = 'none'; // Hide admin link
+        document.getElementById('student-link').style.display = 'block'; // Show student link
+    }
+</script>
+
+</body>
+</html>

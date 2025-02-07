@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question-form {
+            margin: 20px 0;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question-list {
+            margin-top: 20px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            color: #444;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-left: 10px; /* For equal spacing */
+            margin-right: 10px; /* For equal spacing */
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Question Bank</h1>
+
+    <div class="question-form">
+        <h2>Add Question</h2>
+        <input type="text" id="question" placeholder="Enter your question" required>
+        <input type="text" id="category" placeholder="Category (e.g., Mathematics)" required>
+        
+        <div>
+            <input type="text" class="option" placeholder="Option 1" required>
+            <input type="text" class="option" placeholder="Option 2" required>
+            <input type="text" class="option" placeholder="Option 3">
+            <input type="text" class="option" placeholder="Option 4">
+        </div>
+        
+        <button onclick="addQuestion()">Add Question</button>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    <div class="question-list" id="questionList">
+        <h2>Questions</h2>
+        <!-- Questions will be displayed here -->
+    </div>
+
+    <script>
+        const questions = [];
+
+        function addQuestion() {
+            const questionInput = document.getElementById('question');
+            const categoryInput = document.getElementById('category');
+            const errorMessage = document.getElementById('error-message');
+
+            const questionText = questionInput.value.trim();
+            const categoryText = categoryInput.value.trim();
+            const options = Array.from(document.querySelectorAll('.option')).map(input => input.value.trim());
+
+            // Clear previous error messages
+            errorMessage.textContent = '';
+
+            if (questionText === "" || categoryText === "" || options.some(option => option === "")) {
+                errorMessage.textContent = "Please fill in all required fields.";
+                return; // Exit if inputs are invalid
+            }
+
+            const questionObject = {
+                question: questionText,
+                category: categoryText,
+                options: options,
+            };
+            questions.push(questionObject);
+            questionInput.value = '';
+            categoryInput.value = '';
+            document.querySelectorAll('.option').forEach(input => input.value = ''); // Clear options
+            displayQuestions();
+        }
+
+        function displayQuestions() {
+            const questionList = document.getElementById('questionList');
+            questionList.innerHTML = '<h2>Questions</h2>'; // Reset the list
+
+            questions.forEach((q, index) => {
+                const questionItem = document.createElement('div');
+                questionItem.classList.add('question-item');
+                questionItem.innerText = `${index + 1}. ${q.question} (Category: ${q.category})`;
+                
+                // Display options
+                const optionsList = document.createElement('ul');
+                q.options.forEach(option => {
+                    const optionItem = document.createElement('li');
+                    optionItem.innerText = option;
+                    optionsList.appendChild(optionItem);
+                });
+                
+                questionItem.appendChild(optionsList);
+                questionList.appendChild(questionItem);
+            });
+        }
+    </script>
+
+</body>
+</html>
