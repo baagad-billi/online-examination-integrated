@@ -9,6 +9,8 @@ public class UserModel {
 	
 	private String password;
 
+	private String role;
+
 	public String getUsername() {
 		return username;
 	}
@@ -31,5 +33,13 @@ public class UserModel {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

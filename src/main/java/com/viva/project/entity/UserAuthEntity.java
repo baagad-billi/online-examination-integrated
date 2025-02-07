@@ -25,6 +25,9 @@ public class UserAuthEntity {
 	@Column(name = "retry_count")
 	private long retryCount;
 
+	@Column(name = "role")
+	private String role;
+
 	public long getId() {
 		return id;
 	}
@@ -73,4 +76,11 @@ public class UserAuthEntity {
 		this.retryCount = retryCount;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 }

@@ -5,6 +5,8 @@ import com.viva.project.repository.UserAuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserAuthServiceImpl implements UserAuthService {
 
@@ -12,20 +14,19 @@ public class UserAuthServiceImpl implements UserAuthService {
 	private UserAuthRepository userAuthRepository;
 
 	@Override
-	public boolean doUserLogin(String username, String password) {
-		return userAuthRepository.findByUsername(username)
-				.map(userAuth -> password.equals(userAuth.getPassword()))
-				.orElseThrow(() -> new RuntimeException("User not found"));
+	public Optional<UserAuthEntity> getUser(String username, String password) {
+		return userAuthRepository.findByUsername(username);
 	}
 
 	@Override
-	public UserAuthEntity doUserRegistration(String username, String password) {
+	public UserAuthEntity doUserRegistration(String username, String password, String role) {
 		UserAuthEntity userAuth = new UserAuthEntity();
 		userAuth.setUsername(username);
 		userAuth.setPassword(password);
 		userAuth.setIsActive("Y");
 		userAuth.setRetryCount(0L);
 		userAuth.setIsLoggedIn("N");
+		userAuth.setRole(role);
 		return userAuthRepository.save(userAuth);
 	}
 

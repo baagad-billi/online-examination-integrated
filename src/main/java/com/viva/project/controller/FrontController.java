@@ -1,7 +1,6 @@
 package com.viva.project.controller;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import com.viva.project.entity.UserAuthEntity;
 import com.viva.project.model.UserModel;
@@ -48,20 +47,29 @@ public class FrontController {
 				.filter(str -> !str.isBlank());
 
 		if (username.isPresent() && password.isPresent()) {
-			try {
-                boolean loginSuccessful = userAuthService.doUserLogin(username.get(), password.get());
+			Optional<UserAuthEntity> user = userAuthService.getUser(username.get(), password.get());
+
+			if (user.isPresent()) {
+				String dbPassword = user.get().getPassword();
+				String role = user.get().getRole();
+
+				boolean loginSuccessful = dbPassword.equals(userModel.getPassword());
+
 				if (loginSuccessful) {
 					session.setAttribute("loggedIn", true);
-					return "redirect:/profile";
+					if ("ADMIN".equals(role)) {
+						return "redirect:/admin/index";
+					} else {
+						return "redirect:/profile";
+					}
 				} else {
 					session.setAttribute("loggedIn", false);
 					redirectAttributes.addFlashAttribute("errorMsg", "Username or password incorrect");
 				}
-			} catch (Exception e) {
+			} else {
 				session.setAttribute("loggedIn", false);
 				redirectAttributes.addFlashAttribute("errorMsg", "User not found!");
 			}
-
 		} else {
 			redirectAttributes.addFlashAttribute("errorMsg", "Username and password cannot be empty / blank");
 			session.setAttribute("loggedIn", false);
@@ -91,7 +99,7 @@ public class FrontController {
 
 		if (username.isPresent() && password.isPresent()) {
 			try {
-				UserAuthEntity userAuthEntity = userAuthService.doUserRegistration(username.get(), password.get());
+				UserAuthEntity userAuthEntity = userAuthService.doUserRegistration(username.get(), password.get(), userModel.getRole());
 				userModel.setId(userAuthEntity.getId());
 				redirectAttributes.addFlashAttribute("user", userModel);
 
