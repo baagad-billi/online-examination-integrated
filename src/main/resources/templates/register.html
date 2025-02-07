@@ -59,12 +59,12 @@
 
 <body>
 <div class="container">
-    <h2>Login</h2>
+    <h2>Register</h2>
 
     <!-- Display error message if "error" attribute is present -->
     <p th:if="${error}" th:text="${errorMsg}" class="error-message"></p>
 
-    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+    <form action="#" th:action="@{/register}" th:object="${user}" method="post">
         <div class="input-group">
             <label for="username">Username:</label>
             <input th:field="*{username}" type="text" name="username" required>
@@ -73,7 +73,7 @@
             <label for="password">Password:</label>
             <input th:field="*{password}" type="password" name="password" required>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
     </form>
 </div>
 </body>

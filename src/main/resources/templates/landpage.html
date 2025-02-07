@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Exam</title>
-<!--    <script src="script.js"></script>-->
     <style>
         body {
             margin: 0;
@@ -91,17 +90,37 @@
             margin: 0 auto;
             line-height: 1.6;
         }
+
+        /* For the whole <li> item */
+        .disabled {
+            opacity: 0.5;  /* Make it visibly greyed out */
+            pointer-events: none;  /* Prevent clicking */
+        }
+
+        /* Specifically for the <a> link inside */
+        .disabled-link {
+            color: grey !important;  /* Ensure text color is grey */
+            cursor: not-allowed;  /* Show 'not-allowed' cursor */
+            text-decoration: none;  /* Remove underline */
+        }
+
     </style>
 </head>
 <body>
-
+<th:block th:with="isLoggedIn=${session.loggedIn != null and session.loggedIn}">
     <header>
         <div style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">
             <img th:src="@{/logo.jpeg}" alt="Brand Logo" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#profile">Profile</a></li> <!-- Keeping Profile -->
+            <li th:classappend="${isLoggedIn} ? '' : 'disabled'">
+                <a href="#profile" th:attr="aria-disabled=${!isLoggedIn}" th:classappend="${!isLoggedIn} ? 'disabled-link' : ''">
+                    Profile
+                </a>
+            </li>
+
+            <!-- Keeping Profile -->
             <li><a href="#about">About</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="#l"></a></li>
@@ -112,7 +131,9 @@
         <div class="hero-content">
             <h1>Online Exam</h1>
             <p>Experience a seamless online examination process with our platform. Take tests from anywhere, at any time.</p>
-            <a th:href="@{/loginAction}">Login</a>
+            <a th:if="${isLoggedIn}" th:href="@{/logout}">Logout</a>
+            <a th:if="${!isLoggedIn}" th:href="@{/login}">Login</a>
+            <a th:if="${!isLoggedIn}" th:href="@{/register}">Register</a>
         </div>
     </section>
 
@@ -125,6 +146,6 @@
             at any time, without the hassle of traditional testing methods.
         </p>
     </section>
-
+</th:block>
 </body>
 </html>
