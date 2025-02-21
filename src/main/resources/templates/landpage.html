@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Exam</title>
+    <script src="script.js"></script>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
         }
+        /* Header Styles */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 15px 30px;
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -22,12 +24,32 @@
             list-style: none;
             display: flex;
             gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        header ul li {
+            display: inline;
         }
         header ul li a {
             text-decoration: none;
             color: #333;
             font-weight: bold;
+            padding: 10px;
         }
+        header ul li a:hover {
+            color: #FFA500;
+        }
+        .signup-btn {
+            background-color: #FFA500;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .signup-btn:hover {
+            background-color: #ff8c00;
+        }
+        /* Hero Section */
         .hero-section {
             position: relative;
             height: 70vh;
@@ -67,14 +89,50 @@
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #FFA500;
-            color: #fff;
-            text-decoration: none;
             border-radius: 5px;
             font-size: 1em;
+            text-decoration: none;
         }
+        .btn-primary {
+            background-color: #FFA500;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.8;
+        }
+        /* Features Section */
+        .features-section {
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .features-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .features-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            max-width: 250px;
+            text-align: center;
+        }
+        .feature-item img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+        /* About Section */
         .about-section {
-            padding: 40px 20px; /* Reduced padding */
+            padding: 40px 20px;
             background-color: #fff;
             text-align: center;
         }
@@ -90,24 +148,27 @@
             margin: 0 auto;
             line-height: 1.6;
         }
-
-        /* For the whole <li> item */
-        .disabled {
-            opacity: 0.5;  /* Make it visibly greyed out */
-            pointer-events: none;  /* Prevent clicking */
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
-
-        /* Specifically for the <a> link inside */
-        .disabled-link {
-            color: grey !important;  /* Ensure text color is grey */
-            cursor: not-allowed;  /* Show 'not-allowed' cursor */
-            text-decoration: none;  /* Remove underline */
+        footer a {
+            color: #FFA500;
+            margin: 0 5px;
+            text-decoration: none;
         }
-
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
+
 <th:block th:with="isLoggedIn=${session.loggedIn != null and session.loggedIn}">
+    <!-- Header Section -->
     <header>
         <div style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">
             <img th:src="@{/logo.jpeg}" alt="Brand Logo" style="width: 100%; height: 100%; object-fit: cover;">
@@ -115,37 +176,64 @@
         <ul>
             <li><a href="#home">Home</a></li>
             <li th:classappend="${isLoggedIn} ? '' : 'disabled'">
-                <a href="#profile" th:attr="aria-disabled=${!isLoggedIn}" th:classappend="${!isLoggedIn} ? 'disabled-link' : ''">
+                <a th:href="@{/profile}" th:attr="aria-disabled=${!isLoggedIn}" th:classappend="${!isLoggedIn} ? 'disabled-link' : ''">
                     Profile
                 </a>
             </li>
-
-            <!-- Keeping Profile -->
             <li><a href="#about">About</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <li><a href="#l"></a></li>
+            <li th:if="${!isLoggedIn}"><a th:href="@{/register}" class="signup-btn">Sign Up</a></li>
         </ul>
     </header>
-
+    <p th:if="${logout}" th:text="'Logged out successfully!'"></p>
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
             <h1>Online Exam</h1>
             <p>Experience a seamless online examination process with our platform. Take tests from anywhere, at any time.</p>
-            <a th:if="${isLoggedIn}" th:href="@{/logout}">Logout</a>
-            <a th:if="${!isLoggedIn}" th:href="@{/login}">Login</a>
-            <a th:if="${!isLoggedIn}" th:href="@{/register}">Register</a>
+            <a th:if="${!isLoggedIn}" th:href="@{/login}" class="btn-primary">Login</a>
+            <a href="#features" class="btn-secondary">Explore Features</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h2>Key Features</h2>
+        <div class="features-container">
+            <div class="feature-item">
+                <img th:src="@{/security.png}" alt="Security">
+                <h3>Secure</h3>
+                <p>State-of-the-art encryption for data security.</p>
+            </div>
+            <div class="feature-item">
+                <img th:src="@{/results.png}" alt="Results">
+                <h3>Instant Results</h3>
+                <p>Automated grading for quick result generation.</p>
+            </div>
+            <div class="feature-item">
+                <img th:src="@{/anywhere.png}" alt="Access Anywhere">
+                <h3>Access Anywhere</h3>
+                <p>Take exams from any device, anytime.</p>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section class="about-section" id="about">
         <h2>About</h2>
-        <p>
-            Welcome to our Online Exam platform, where we provide a comprehensive solution for educational institutions and students alike.
-            Our goal is to deliver an efficient, reliable, and easy-to-use examination system that empowers users to take exams from anywhere, 
-            at any time, without the hassle of traditional testing methods.
-        </p>
+        <p>Our Online Exam platform delivers an efficient and user-friendly solution for taking exams anytime, anywhere. Designed for students and institutions, it simplifies the entire examination process.</p>
     </section>
 </th:block>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Online Exam. All rights reserved.</p>
+    <p>
+        <a href="#">Facebook</a> |
+        <a href="#">Twitter</a> |
+        <a href="#">LinkedIn</a>
+    </p>
+</footer>
+
 </body>
 </html>

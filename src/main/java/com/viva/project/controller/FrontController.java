@@ -21,7 +21,9 @@ public class FrontController {
 
 	//Load the landing page
 	@GetMapping("/")
-	public String viewLandPage(Model model) {
+	public String viewLandPage(@RequestParam(value = "logout", required = false) boolean logout, Model model, HttpSession session) {
+		model.addAttribute("logout", logout);
+		session.setAttribute("loggedIn", false);
 		return "landpage";
 	}
 
@@ -58,7 +60,7 @@ public class FrontController {
 				if (loginSuccessful) {
 					session.setAttribute("loggedIn", true);
 					if ("ADMIN".equals(role)) {
-						return "redirect:/admin/index";
+						return "redirect:/admin_profile";
 					} else {
 						return "redirect:/profile";
 					}
@@ -122,7 +124,12 @@ public class FrontController {
 
 	@GetMapping("/profile")
 	public String viewProfilePage(Model model) {
-		return "dashboard";
+		return "student_dashboard";
+	}
+
+	@GetMapping("/admin_profile")
+	public String viewAdminProfilePage(Model model) {
+		return "admin_dashboard";
 	}
 //
 //	@GetMapping("/showNewEmployeeForm")

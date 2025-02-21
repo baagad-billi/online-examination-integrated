@@ -15,8 +15,9 @@ public class UserAuthServiceImpl implements UserAuthService {
 
 	@Override
 	public Optional<UserAuthEntity> getUser(String username, String password) {
-		return userAuthRepository.findByUsername(username);
+		return userAuthRepository.findByUserName(username);
 	}
+
 
 	@Override
 	public UserAuthEntity doUserRegistration(String username, String password, String role) {

@@ -11,7 +11,7 @@ public class UserAuthEntity {
 	private long id;
 	
 	@Column(name = "user_name")
-	private String username;
+	private String userName;
 	
 	@Column(name = "password")
 	private String password;
@@ -45,11 +45,11 @@ public class UserAuthEntity {
 	}
 
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.userName = username;
 	}
 
 	public String getIsLoggedIn() {
